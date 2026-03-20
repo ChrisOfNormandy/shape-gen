@@ -1,0 +1,23 @@
+.grid-container {
+    display: flex;
+    flex-direction: column;
+
+    .grid-row {
+        display: flex;
+
+        .grid-cell {
+            width: 16px;
+            height: 16px;
+
+            border: 1px solid black;
+
+            &.active {
+                background-color: black;
+            }
+
+            &.not-active {
+                background-color: white;
+            }
+        }
+    }
+}
