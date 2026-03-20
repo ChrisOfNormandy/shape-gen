@@ -1,9 +1,12 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { ShapeProvider } from './ShapeProvider.tsx'
+import { StrictMode } from 'react'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <App />
+        <ShapeProvider>
+            <App />
+        </ShapeProvider>
     </StrictMode>,
 )
