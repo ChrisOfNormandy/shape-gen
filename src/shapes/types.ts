@@ -1,4 +1,4 @@
-export type ShapeType = 'ellipse' | 'rectangle' | 'triangle' | 'custom'
+export type ShapeType = 'ellipse' | 'rectangle' | 'triangle'
 export type OutlineDefinition = Pixel[];
 
 export interface Pixel {

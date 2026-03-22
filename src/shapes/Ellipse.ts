@@ -1,5 +1,5 @@
 import { Shape, type IShape } from "./Shape";
-import type { OutlineDefinition, ShapeOptions, ShapeType } from "./types";
+import type { OutlineDefinition, ShapeOptions } from "./types";
 
 export default class Ellipse extends Shape implements IShape {
 
@@ -39,7 +39,8 @@ export default class Ellipse extends Shape implements IShape {
 
     // Generates a 3D boolean array representing an ellipse outline with the given radii
     getPixelShape() {
-        const outlineDefinition: OutlineDefinition = []
+        const outlineDefinition: OutlineDefinition = [];
+
         for (let y = -this.radiusY; y <= this.radiusY; y++) {
             for (let x = -this.radiusX; x <= this.radiusX; x++) {
                 if (this.isEllipseOutline(x, y))

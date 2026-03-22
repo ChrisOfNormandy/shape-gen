@@ -1,0 +1,32 @@
+@use '~layout' as layout;
+@use '~styling' as styling;
+
+.grid-container {
+    @include layout.fullsize;
+
+    overflow: hidden;
+
+    .grid-layer {
+        @include layout.fullsize;
+        overflow: auto;
+
+        .grid-row {
+            display: flex;
+
+            .grid-cell {
+                min-width: 16px;
+                min-height: 16px;
+
+                border: 1px solid black;
+
+                &.active {
+                    background-color: black;
+                }
+
+                &.not-active {
+                    background-color: white;
+                }
+            }
+        }
+    }
+}

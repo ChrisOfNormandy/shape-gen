@@ -1,23 +1,30 @@
+import './styles/shape-form.scss';
+import { getClassName } from '@syren-dev-tech/concauses/props';
+import { Select } from "@syren-dev-tech/confects/selectors"
 import { useState } from "react"
-import type { ShapeType } from "../shapes/types"
 import EllipseForm from "./EllipseForm"
 import RectangleForm from "./RectangleForm"
+import type { ShapeType } from "../shapes/types"
+import { ThemeOptions } from '@syren-dev-tech/confetti/themes';
 
 export default function ShapeForm() {
 
     const [selectedShape, setSelectedShape] = useState<ShapeType>('ellipse')
 
-    return <div>
-        <select value={selectedShape} onChange={e => setSelectedShape(e.target.value as ShapeType)}>
-            <option value='ellipse'>Ellipse</option>
-            <option value='rectangle'>Rectangle</option>
-            <option value='triangle'>Triangle</option>
-            <option value='custom'>Custom</option>
-        </select>
+    return <div className={getClassName('shape-form-wrapper', new ThemeOptions({ background: { style: 'secondary' } }).toClassName())}>
+        <Select
+            value={selectedShape}
+            onChange={e => setSelectedShape(e.target.value as ShapeType)}
+            options={[
+                { value: 'ellipse', label: 'Ellipse' },
+                { value: 'rectangle', label: 'Rectangle' },
+                { value: 'triangle', label: 'Triangle' }
+            ]}
+            className={new ThemeOptions({ background: { style: 'main' } }).toClassName()}
+        />
 
         {selectedShape === 'ellipse' && <EllipseForm />}
         {selectedShape === 'rectangle' && <RectangleForm />}
         {selectedShape === 'triangle' && <div>Triangle form</div>}
-        {selectedShape === 'custom' && <div>Custom form</div>}
     </div>
 }

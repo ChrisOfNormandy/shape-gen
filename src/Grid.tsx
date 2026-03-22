@@ -1,8 +1,9 @@
-import { useShapes } from "./ShapeProvider";
+import type { IShape } from "./shapes/Shape";
 import type { OutlineDefinition, Pixel } from "./shapes/types";
+import './styles/grid.scss';
 
 interface GridProps {
-    layer: number
+    shapes: IShape[]
 }
 
 function getBoundary(definition: OutlineDefinition) {
@@ -24,9 +25,12 @@ function getBoundary(definition: OutlineDefinition) {
 }
 
 function merge2dArray(arrays: OutlineDefinition[]): OutlineDefinition {
+    console.log(arrays);
+
     if (arrays.length === 0) return []
 
-    const merged: OutlineDefinition = []
+    const merged: OutlineDefinition = [];
+
     for (const array of arrays) {
         for (const pixel of array) {
             const existingPixel = merged.find(p => p.x === pixel.x && p.y === pixel.y)
@@ -43,12 +47,12 @@ function merge2dArray(arrays: OutlineDefinition[]): OutlineDefinition {
     return merged
 }
 
-export default function Grid({ layer }: Readonly<GridProps>) {
-    const { shapes } = useShapes();
+export default function Grid({ shapes }: Readonly<GridProps>) {
 
-    const shapesThisLayer = shapes.filter(shape => shape.getOptions().layer === layer)
-    const pixelData = merge2dArray(shapesThisLayer.map(shape => shape.getPixelShape()));
+    const pixelData = merge2dArray(shapes.map(shape => shape.getPixelShape()));
     const boundary = getBoundary(pixelData);
+
+    console.log(pixelData);
 
     if (pixelData.length !== 0)
         pixelData.push({ x: 0, y: 0, color: 'black' })
@@ -81,6 +85,8 @@ export default function Grid({ layer }: Readonly<GridProps>) {
     for (const pixel of pixelData) {
         grid[pixel.y][pixel.x] = pixel;
     }
+
+    console.log(grid);
 
     return <div className='grid-layer'>
         {

@@ -1,6 +1,8 @@
 import { useActionState } from "react";
 import Ellipse from "../shapes/Ellipse";
 import { useShapes } from "../ShapeProvider";
+import { IntegerInput } from "@syren-dev-tech/confects/inputs";
+import { Button } from "@syren-dev-tech/confects/buttons";
 
 interface EllipseModFormProps {
     ellipse: Ellipse
@@ -42,32 +44,25 @@ export default function EllipseModForm({ ellipse }: Readonly<EllipseModFormProps
     return <form action={submitAction}>
         {error && <div className="error">{error.message}</div>}
 
-        <div>
-            <label>
-                Radius X:
-                <input type="number" defaultValue={ellipse.radiusX} name='radiusX' />
-            </label>
-            <label>
-                Radius Y:
-                <input type="number" defaultValue={ellipse.radiusY} name='radiusY' />
-            </label>
+        <div className='shaape-inputs'>
+            <label htmlFor="radiusX">Radius X:</label>
+            <IntegerInput type="number" id="radiusX" defaultValue={ellipse.radiusX} name='radiusX' />
+
+            <label htmlFor="radiusY">Radius Y:</label>
+            <IntegerInput type="number" id="radiusY" defaultValue={ellipse.radiusY} name='radiusY' />
         </div>
 
-        <label>
-            Buffer:
-            <input type="number" defaultValue={ellipse.buffer} name='buffer' step={0.01} />
-        </label>
+        <div className='common-inputs'>
+            <label htmlFor="buffer">Buffer:</label>
+            <input type="number" id="buffer" defaultValue={ellipse.buffer} name='buffer' step={0.01} />
 
-        <label>
-            Color:
-            <input type="color" defaultValue={ellipse.getOptions().color} name='color' />
-        </label>
+            <label htmlFor="color">Color:</label>
+            <input type="color" id="color" defaultValue={ellipse.getOptions().color} name='color' />
 
-        <label>
-            Layer:
-            <input type="number" defaultValue={ellipse.getOptions().layer} name='layer' />
-        </label>
+            <label htmlFor="layer">Layer:</label>
+            <input type="number" id="layer" defaultValue={ellipse.getOptions().layer} name='layer' />
+        </div>
 
-        <button type="submit" disabled={isPending}>Save</button>
+        <Button type="submit" disabled={isPending}>Save</Button>
     </form>
 }

@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState, type Dispatch, type SetStateAction } from "react";
-import type { IShape } from "./shapes/types";
+import type { IShape } from "./shapes/Shape";
 
 interface IShapeContext {
     shapes: IShape[]

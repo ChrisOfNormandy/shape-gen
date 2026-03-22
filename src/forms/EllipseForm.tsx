@@ -1,3 +1,6 @@
+import { Button } from "@syren-dev-tech/confects/buttons"
+import { ColorInput, DecimalInput, IntegerInput } from "@syren-dev-tech/confects/inputs"
+import { ThemeOptions } from "@syren-dev-tech/confetti/themes"
 import { useActionState } from "react"
 import { useShapes } from "../ShapeProvider"
 import Ellipse from "../shapes/Ellipse"
@@ -37,23 +40,23 @@ export default function EllipseForm() {
     return <form action={submitAction}>
         {error && <div className="error">{error.message}</div>}
 
-        <div>
-            <label>Radius X:</label>
-            <input type="number" id="radiusX" name="radiusX" defaultValue={5} />
+        <div className='radius-inputs'>
+            <label htmlFor="radiusX">Radius X:</label>
+            <IntegerInput id="radiusX" name="radiusX" defaultValue={5} theme={new ThemeOptions({ background: { style: 'main' } })} />
 
-            <label>Radius Y:</label>
-            <input type="number" id="radiusY" name="radiusY" defaultValue={5} />
+            <label htmlFor="radiusY">Radius Y:</label>
+            <IntegerInput id="radiusY" name="radiusY" defaultValue={5} theme={new ThemeOptions({ background: { style: 'main' } })} />
         </div>
 
-        <label>Buffer:</label>
-        <input type="number" id="buffer" name="buffer" defaultValue={0.1} step={0.01} />
+        <label htmlFor="buffer">Buffer:</label>
+        <DecimalInput id="buffer" name="buffer" defaultValue={0.1} step={0.01} theme={new ThemeOptions({ background: { style: 'main' } })} />
 
-        <label>Color:</label>
-        <input type="color" id="color" name="color" defaultValue="#ff0000" />
+        <label htmlFor="color">Color:</label>
+        <ColorInput id="color" name="color" defaultValue="#ff0000" theme={new ThemeOptions({ background: { style: 'main' } })} />
 
-        <label>Layer:</label>
-        <input type="number" id="layer" name="layer" defaultValue={0} />
+        <label htmlFor="layer">Layer:</label>
+        <IntegerInput id="layer" name="layer" defaultValue={0} theme={new ThemeOptions({ background: { style: 'main' } })} />
 
-        <button type='submit' disabled={isPending}>Create Ellipse</button>
+        <Button type='submit' disabled={isPending} theme={new ThemeOptions({ background: { style: 'success' } })}>Create Ellipse</Button>
     </form>
 }

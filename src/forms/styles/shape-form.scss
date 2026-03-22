@@ -1,0 +1,13 @@
+@use '~layout' as layout;
+@use '~styling' as styling;
+
+.shape-form-wrapper {
+    @include layout.flex(true);
+    @include styling.rounded;
+
+    padding: 10px;
+
+    form {
+        margin-left: 10px;
+    }
+}

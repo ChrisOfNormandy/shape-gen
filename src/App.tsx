@@ -1,12 +1,17 @@
 import './styles.scss';
+import { Glyph } from '@syren-dev-tech/confects/buttons';
+import { Heading } from '@syren-dev-tech/confects/decorations';
+import { IntegerInput } from '@syren-dev-tech/confects/inputs';
+import { Page, PageBody, PageHeader, PageMain } from '@syren-dev-tech/confects/containers';
+import { ThemeOptions } from '@syren-dev-tech/confetti/themes';
 import { useShapes } from './ShapeProvider';
 import { useState } from "react"
 import EllipseModForm from './forms/EllipseModForm';
 import ErrorBoundary from './ErrorBoundary';
 import Grid from './Grid';
+import RectangleModForm from './forms/RectangleModForm';
 import ShapeForm from './forms/ShapeForm';
 import type Ellipse from './shapes/Ellipse';
-import RectangleModForm from './forms/RectangleModForm';
 import type Rectangle from './shapes/Rectangle';
 
 export default function App() {
@@ -15,58 +20,59 @@ export default function App() {
 
     const [originX, setOriginX] = useState(0)
     const [originY, setOriginY] = useState(0)
-    const [originZ, setOriginZ] = useState(0)
     const [shownLayer, setShownLayer] = useState(0)
 
-    const shapesThisLayer = shapes.filter(shape => shape.getOptions().layer === shownLayer)
+    const shapesThisLayer = shapes.filter(shape => shape.getOptions().layer === shownLayer);
 
-    return <main>
-        <div>
-            <div>
-                <label>Origin X:</label>
-                <input type="number" value={originX} onChange={e => setOriginX(Number.parseInt(e.target.value))} />
+    console.log(shapes, shapesThisLayer);
+
+    return <Page theme={new ThemeOptions({ background: { style: 'body' } })}>
+        <PageHeader theme={new ThemeOptions({ background: { style: 'primary' } })}>
+            <Heading>Pixel Blueprint Generator</Heading>
+
+            <div className='header-controls'>
+                <div className='origin-controls'>
+                    <label htmlFor='originX'>Origin X:</label>
+                    <IntegerInput value={originX} onChange={(e) => setOriginX(Number(e.target.value))} name='originX' theme={new ThemeOptions({ background: { style: 'main' } })} />
+                    <label htmlFor='originY'>Origin Y:</label>
+                    <IntegerInput value={originY} onChange={(e) => setOriginY(Number(e.target.value))} name='originY' theme={new ThemeOptions({ background: { style: 'main' } })} />
+                </div>
+
+                <div className='layer-controls'>
+                    <Glyph icon='dash-lg' onClick={() => setShownLayer(prev => prev - 1)} theme={new ThemeOptions({ background: { style: 'trinary' } })} />
+                    <span>Layer: {shownLayer}</span>
+                    <Glyph icon='plus-lg' onClick={() => setShownLayer(prev => prev + 1)} theme={new ThemeOptions({ background: { style: 'trinary' } })} />
+                </div>
             </div>
+        </PageHeader>
 
-            <div>
-                <label>Origin Y:</label>
-                <input type="number" value={originY} onChange={e => setOriginY(Number.parseInt(e.target.value))} />
-            </div>
+        <PageBody>
+            <PageMain>
+                <ShapeForm />
 
-            <div>
-                <label>Origin Z:</label>
-                <input type="number" value={originZ} onChange={e => setOriginZ(Number.parseInt(e.target.value))} />
-            </div>
+                <div className='render-container'>
+                    <div className='grid-container'>
+                        <Grid shapes={shapesThisLayer} />
+                    </div>
 
-            <div>
-                <button onClick={() => setShownLayer(prev => prev - 1)}>-</button>
-                <span>Layer: {shownLayer}</span>
-                <button onClick={() => setShownLayer(prev => prev + 1)}>+</button>
-            </div>
-        </div>
-
-        <ShapeForm />
-
-        <div className='grid-container'>
-            <Grid layer={shownLayer} />
-        </div>
-
-        <ErrorBoundary>
-            <div>
-                {
-                    shapesThisLayer.map((shape, index) => {
-                        switch (shape.getType()) {
-                            case 'ellipse':
-                                return <EllipseModForm key={index} ellipse={shape as Ellipse} />
-                            case 'rectangle':
-                                return <RectangleModForm key={index} rectangle={shape as Rectangle} />
-                            case 'triangle':
-                                return <div key={index}>Triangle</div>
-                            case 'custom':
-                                return <div key={index}>Custom</div>
-                        }
-                    })
-                }
-            </div>
-        </ErrorBoundary>
-    </main>
+                    <div className='mod-forms'>
+                        <ErrorBoundary>
+                            {
+                                shapesThisLayer.map((shape, index) => {
+                                    switch (shape.getType()) {
+                                        case 'ellipse':
+                                            return <EllipseModForm key={index} ellipse={shape as Ellipse} />
+                                        case 'rectangle':
+                                            return <RectangleModForm key={index} rectangle={shape as Rectangle} />
+                                        case 'triangle':
+                                            return <div key={index}>Triangle</div>
+                                    }
+                                })
+                            }
+                        </ErrorBoundary>
+                    </div>
+                </div>
+            </PageMain>
+        </PageBody>
+    </Page>
 }

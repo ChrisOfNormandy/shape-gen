@@ -1,22 +1,58 @@
-.grid-layer {
-    display: flex;
-    flex-direction: column;
+@use '~layout' as layout;
 
-    .grid-row {
-        display: flex;
+.page {
+    .page-header {
+        .header-controls {
+            @include layout.flex-end(false, true);
 
-        .grid-cell {
-            width: 16px;
-            height: 16px;
-
-            border: 1px solid black;
-
-            &.active {
-                background-color: black;
+            .origin-controls {
+                @include layout.flex(true);
             }
 
-            &.not-active {
-                background-color: white;
+            .layer-controls {
+                @include layout.flex-end(true);
+
+                padding: 10px;
+
+                .glyph {
+                    margin: 0 5px;
+                }
+            }
+        }
+    }
+
+    .page-body {
+        .page-main {
+            @include layout.flex(false, true);
+            @include layout.tall;
+
+            overflow: hidden;
+
+            .render-container {
+                @include layout.flex;
+                @include layout.fullsize;
+
+                overflow: hidden;
+
+                .mod-forms {
+                    @include layout.flex(false, true);
+                    @include layout.tall;
+
+                    padding: 10px;
+                    overflow: auto;
+
+                    form {
+                        @include layout.flex(false, true);
+
+                        .shape-inputs {
+                            @include layout.flex(false, true);
+                        }
+
+                        .common-inputs {
+                            @include layout.flex(false, true);
+                        }
+                    }
+                }
             }
         }
     }
