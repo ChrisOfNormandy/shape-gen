@@ -1,23 +1,46 @@
-.grid-container {
-    display: flex;
-    flex-direction: column;
+@use '~layout' as layout;
 
-    .grid-row {
-        display: flex;
+.page {
 
-        .grid-cell {
-            width: 16px;
-            height: 16px;
+  .page-header {
 
-            border: 1px solid black;
+    .header-controls {
+      @include layout.flex-end(false, true);
 
-            &.active {
-                background-color: black;
-            }
+      .origin-controls {
+        @include layout.flex(true);
+      }
 
-            &.not-active {
-                background-color: white;
-            }
+      .layer-controls {
+        @include layout.flex-end(true);
+
+        padding: 10px;
+
+        .glyph {
+          margin: 0 5px;
         }
+      }
     }
+  }
+
+  .page-body {
+
+    .page-main {
+      @include layout.flex;
+      @include layout.fullsize;
+
+      overflow: hidden;
+      position: relative;
+
+      .mod-forms {
+        @include layout.flex(false, true);
+        @include layout.tall;
+
+        padding: 10px;
+        overflow: auto;
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
 }

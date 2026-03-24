@@ -1,0 +1,37 @@
+@use '~layout' as layout;
+@use '~styling' as styling;
+
+.shape-form-wrapper {
+  @include layout.flex(true);
+  @include styling.rounded;
+  @include layout.floating;
+
+  padding: 10px;
+  left: 0;
+  width: fit-content;
+
+  .shape-form {
+    @include styling.rounded;
+
+    padding: 10px;
+    margin-left: 10px;
+
+    .shape-inputs {
+      @include layout.flex(false, true);
+    }
+
+    .common-inputs {
+      @include layout.flex(false, true);
+    }
+
+    .origin-inputs {
+      @include layout.flex(false, true);
+    }
+
+    .controls {
+      @include layout.flex-center(true);
+
+      margin-top: 10px;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@use '~layout' as layout;
+@use '~styling' as styling;
+
+.shape-mod-form-wrapper {
+  @include layout.flex(true);
+  @include styling.rounded;
+
+  padding: 10px;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  .shape-form {
+    @include styling.rounded;
+
+    padding: 10px;
+    margin-left: 10px;
+
+    .shape-inputs {
+      @include layout.flex(false, true);
+    }
+
+    .common-inputs {
+      @include layout.flex(false, true);
+    }
+
+    .origin-inputs {
+      @include layout.flex(false, true);
+    }
+
+    .controls {
+      @include layout.flex-center(true);
+
+      margin-top: 10px;
+    }
+  }
+
+  .mod-actions {
+    @include layout.flex-even(false, true);
+    @include layout.tall;
+
+    .shape-mod-controls-form {
+      margin-left: 10px;
+
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+
+      .btn {
+        @include layout.wide;
+      }
+    }
+  }
+}
