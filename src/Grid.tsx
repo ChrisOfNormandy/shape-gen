@@ -52,8 +52,6 @@ export default function Grid({ shapes }: Readonly<GridProps>) {
     const pixelData = merge2dArray(shapes.map(shape => shape.getPixelShape()));
     const boundary = getBoundary(pixelData);
 
-    console.log(pixelData);
-
     if (pixelData.length !== 0)
         pixelData.push({ x: 0, y: 0, color: 'black' })
 
@@ -85,8 +83,6 @@ export default function Grid({ shapes }: Readonly<GridProps>) {
     for (const pixel of pixelData) {
         grid[pixel.y][pixel.x] = pixel;
     }
-
-    console.log(grid);
 
     return <div className='grid'>
         <div className='grid-internal'>

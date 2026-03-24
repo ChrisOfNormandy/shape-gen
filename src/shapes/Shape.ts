@@ -1,6 +1,8 @@
 import type { OutlineDefinition, ShapeOptions, ShapeType } from "./types";
 
 export interface IShape {
+    type: ShapeType
+    options: ShapeOptions;
     getOptions(): ShapeOptions
     getType(): ShapeType
     getPixelShape(): OutlineDefinition

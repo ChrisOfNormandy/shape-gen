@@ -1,6 +1,6 @@
 import './styles/shape-form.scss';
 import { Button } from '@syren-dev-tech/confects/buttons';
-import { capitalize } from '@syren-dev-tech/concauses/strings';
+import { capitalize, uniqueKey } from '@syren-dev-tech/concauses/strings';
 import { ColorInput, DecimalInput, IntegerInput } from '@syren-dev-tech/confects/inputs';
 import { getClassName } from '@syren-dev-tech/concauses/props';
 import { Select } from "@syren-dev-tech/confects/selectors"
@@ -33,6 +33,8 @@ export default function ShapeForm() {
     const options = Array.from(shapeOptions.keys()).map(key => ({ value: key, label: capitalize(key) }));
     const shapeInputs = Array.from(shapeOptions.entries()).map(([key, Component]) => selectedShape === key ? <Component key={key} /> : null)
 
+    const color = randomColor();
+
     return <div className={getClassName('shape-form-wrapper', new ThemeOptions({ background: { style: 'secondary' } }).toClassName())}>
         <Select
             value={selectedShape}
@@ -53,7 +55,7 @@ export default function ShapeForm() {
                 <DecimalInput id="buffer" name="buffer" defaultValue={0.1} step={0.01} theme={new ThemeOptions({ background: { style: 'main' } })} />
 
                 <label htmlFor="color">Color:</label>
-                <ColorInput id="color" name="color" defaultValue={randomColor()} theme={new ThemeOptions({ background: { style: 'main' } })} />
+                <ColorInput id="color" name="color" defaultValue={color} theme={new ThemeOptions({ background: { style: 'main' } })} />
 
                 <label htmlFor="layer">Layer:</label>
                 <IntegerInput id="layer" name="layer" defaultValue={0} theme={new ThemeOptions({ background: { style: 'main' } })} />
