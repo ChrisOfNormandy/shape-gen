@@ -4,15 +4,12 @@ import { Heading } from '@syren-dev-tech/confects/decorations';
 import { IntegerInput } from '@syren-dev-tech/confects/inputs';
 import { Page, PageBody, PageHeader, PageMain } from '@syren-dev-tech/confects/containers';
 import { ThemeOptions } from '@syren-dev-tech/confetti/themes';
+import { uniqueKey } from '@syren-dev-tech/concauses/strings';
 import { useShapes } from './ShapeProvider';
 import { useState } from "react"
-import EllipseModForm from './forms/EllipseModForm';
-import ErrorBoundary from './ErrorBoundary';
 import Grid from './Grid';
-import RectangleModForm from './forms/RectangleModForm';
 import ShapeForm from './forms/ShapeForm';
-import type Ellipse from './shapes/Ellipse';
-import type Rectangle from './shapes/Rectangle';
+import ShapeModForm from './forms/ShapeModForm';
 
 export default function App() {
 
@@ -24,8 +21,6 @@ export default function App() {
 
     const shapesThisLayer = shapes.filter(shape => shape.getOptions().layer === shownLayer);
 
-    console.log(shapes, shapesThisLayer);
-
     return <Page theme={new ThemeOptions({ background: { style: 'body' } })}>
         <PageHeader theme={new ThemeOptions({ background: { style: 'primary' } })}>
             <Heading>Pixel Blueprint Generator</Heading>
@@ -34,6 +29,7 @@ export default function App() {
                 <div className='origin-controls'>
                     <label htmlFor='originX'>Origin X:</label>
                     <IntegerInput value={originX} onChange={(e) => setOriginX(Number(e.target.value))} name='originX' theme={new ThemeOptions({ background: { style: 'main' } })} />
+
                     <label htmlFor='originY'>Origin Y:</label>
                     <IntegerInput value={originY} onChange={(e) => setOriginY(Number(e.target.value))} name='originY' theme={new ThemeOptions({ background: { style: 'main' } })} />
                 </div>
@@ -50,27 +46,10 @@ export default function App() {
             <PageMain>
                 <ShapeForm />
 
-                <div className='render-container'>
-                    <div className='grid-container'>
-                        <Grid shapes={shapesThisLayer} />
-                    </div>
+                <Grid shapes={shapesThisLayer} />
 
-                    <div className='mod-forms'>
-                        <ErrorBoundary>
-                            {
-                                shapesThisLayer.map((shape, index) => {
-                                    switch (shape.getType()) {
-                                        case 'ellipse':
-                                            return <EllipseModForm key={index} ellipse={shape as Ellipse} />
-                                        case 'rectangle':
-                                            return <RectangleModForm key={index} rectangle={shape as Rectangle} />
-                                        case 'triangle':
-                                            return <div key={index}>Triangle</div>
-                                    }
-                                })
-                            }
-                        </ErrorBoundary>
-                    </div>
+                <div className='mod-forms'>
+                    {shapesThisLayer.map((shape) => <ShapeModForm key={uniqueKey()} shape={shape} />)}
                 </div>
             </PageMain>
         </PageBody>

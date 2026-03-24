@@ -1,59 +1,46 @@
 @use '~layout' as layout;
 
 .page {
-    .page-header {
-        .header-controls {
-            @include layout.flex-end(false, true);
 
-            .origin-controls {
-                @include layout.flex(true);
-            }
+  .page-header {
 
-            .layer-controls {
-                @include layout.flex-end(true);
+    .header-controls {
+      @include layout.flex-end(false, true);
 
-                padding: 10px;
+      .origin-controls {
+        @include layout.flex(true);
+      }
 
-                .glyph {
-                    margin: 0 5px;
-                }
-            }
+      .layer-controls {
+        @include layout.flex-end(true);
+
+        padding: 10px;
+
+        .glyph {
+          margin: 0 5px;
         }
+      }
     }
+  }
 
-    .page-body {
-        .page-main {
-            @include layout.flex(false, true);
-            @include layout.tall;
+  .page-body {
 
-            overflow: hidden;
+    .page-main {
+      @include layout.flex;
+      @include layout.fullsize;
 
-            .render-container {
-                @include layout.flex;
-                @include layout.fullsize;
+      overflow: hidden;
+      position: relative;
 
-                overflow: hidden;
+      .mod-forms {
+        @include layout.flex(false, true);
+        @include layout.tall;
 
-                .mod-forms {
-                    @include layout.flex(false, true);
-                    @include layout.tall;
-
-                    padding: 10px;
-                    overflow: auto;
-
-                    form {
-                        @include layout.flex(false, true);
-
-                        .shape-inputs {
-                            @include layout.flex(false, true);
-                        }
-
-                        .common-inputs {
-                            @include layout.flex(false, true);
-                        }
-                    }
-                }
-            }
-        }
+        padding: 10px;
+        overflow: auto;
+        position: absolute;
+        right: 0;
+      }
     }
+  }
 }

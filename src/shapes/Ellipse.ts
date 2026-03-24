@@ -9,8 +9,8 @@ export default class Ellipse extends Shape implements IShape {
     private isEllipseOutline(x: number, y: number): boolean {
         const cx = 0
         const cy = 0
-        const rx = this.radiusX + this.buffer - 1
-        const ry = this.radiusY + this.buffer - 1
+        const rx = this.radiusX + this.options.buffer - 1
+        const ry = this.radiusY + this.options.buffer - 1
 
         // Equation of an ellipse: ((x-cx)^2 / rx^2) + ((y-cy)^2 / ry^2) = 1
         const getEllipseValue = (px: number, py: number) => {
@@ -44,15 +44,19 @@ export default class Ellipse extends Shape implements IShape {
         for (let y = -this.radiusY; y <= this.radiusY; y++) {
             for (let x = -this.radiusX; x <= this.radiusX; x++) {
                 if (this.isEllipseOutline(x, y))
-                    outlineDefinition.push({ x: x + this.originX, y: y + this.originY, color: this.options.color })
+                    outlineDefinition.push({ x: x + this.options.originX, y: y + this.options.originY, color: this.options.color })
             }
         }
 
         return outlineDefinition
     }
 
-    constructor(radiusX: number, radiusY: number, buffer: number, options: ShapeOptions) {
-        super('ellipse', buffer, options);
+    copy(): IShape {
+        return new Ellipse(this.radiusX, this.radiusY, { ...this.options })
+    }
+
+    constructor(radiusX: number, radiusY: number, options: ShapeOptions) {
+        super('ellipse', options);
         this.radiusX = radiusX
         this.radiusY = radiusY
     }

@@ -11,15 +11,19 @@ export default class Rectangle extends Shape implements IShape {
         for (let y = 0; y <= this.height; y++) {
             for (let x = 0; x <= this.width; x++) {
                 if (x === 0 || x === this.width || y === 0 || y === this.height)
-                    outlineDefinition.push({ x: x + this.originX, y: y + this.originY, color: this.options.color })
+                    outlineDefinition.push({ x: x + this.options.originX, y: y + this.options.originY, color: this.options.color })
             }
         }
 
         return outlineDefinition
     }
 
-    constructor(width: number, height: number, buffer: number, options: ShapeOptions) {
-        super('rectangle', buffer, options);
+    copy(): IShape {
+        return new Rectangle(this.width, this.height, { ...this.options })
+    }
+
+    constructor(width: number, height: number, options: ShapeOptions) {
+        super('rectangle', options);
         this.width = width;
         this.height = height;
     }

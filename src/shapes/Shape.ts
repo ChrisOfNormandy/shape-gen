@@ -4,15 +4,13 @@ export interface IShape {
     getOptions(): ShapeOptions
     getType(): ShapeType
     getPixelShape(): OutlineDefinition
+    copy(): IShape
 }
 
 export class Shape {
 
     readonly type: ShapeType
-    readonly buffer: number
     readonly options: ShapeOptions;
-    readonly originX: number
-    readonly originY: number
 
     getType(): ShapeType {
         return this.type;
@@ -22,11 +20,8 @@ export class Shape {
         return this.options;
     }
 
-    constructor(type: ShapeType, buffer: number, options: ShapeOptions, originX = 0, originY = 0) {
+    constructor(type: ShapeType, options: ShapeOptions) {
         this.type = type;
-        this.buffer = buffer;
         this.options = options;
-        this.originX = originX;
-        this.originY = originY;
     }
 }

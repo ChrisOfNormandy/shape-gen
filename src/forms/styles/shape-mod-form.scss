@@ -1,14 +1,15 @@
 @use '~layout' as layout;
 @use '~styling' as styling;
 
-.shape-form-wrapper {
+.shape-mod-form-wrapper {
   @include layout.flex(true);
   @include styling.rounded;
-  @include layout.floating;
 
   padding: 10px;
-  left: 0;
-  width: fit-content;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
 
   .shape-form {
     @include styling.rounded;
@@ -32,6 +33,23 @@
       @include layout.flex-center(true);
 
       margin-top: 10px;
+    }
+  }
+
+  .mod-actions {
+    @include layout.flex-even(false, true);
+    @include layout.tall;
+
+    .shape-mod-controls-form {
+      margin-left: 10px;
+
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+
+      .btn {
+        @include layout.wide;
+      }
     }
   }
 }

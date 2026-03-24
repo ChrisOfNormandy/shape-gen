@@ -1,4 +1,4 @@
-export type ShapeType = 'ellipse' | 'rectangle' | 'triangle'
+export type ShapeType = 'ellipse' | 'rectangle' | 'line' | 'arc'
 export type OutlineDefinition = Pixel[];
 
 export interface Pixel {
@@ -10,4 +10,7 @@ export interface Pixel {
 export interface ShapeOptions {
     layer: number
     color: string
+    originX: number
+    originY: number
+    buffer: number
 }
