@@ -1,4 +1,4 @@
-import './styles.scss';
+import './styles/app.scss';
 import { Glyph } from '@syren-dev-tech/confects/buttons';
 import { Heading } from '@syren-dev-tech/confects/decorations';
 import { IntegerInput } from '@syren-dev-tech/confects/inputs';

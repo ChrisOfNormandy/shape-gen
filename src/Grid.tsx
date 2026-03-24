@@ -88,17 +88,19 @@ export default function Grid({ shapes }: Readonly<GridProps>) {
 
     console.log(grid);
 
-    return <div className='grid-layer'>
-        {
-            grid.map((row, y) => (
-                <div key={y} className='grid-row'>
-                    {
-                        row.map((pixel, x) => {
-                            return <div key={x} className='grid-cell' style={{ backgroundColor: pixel?.color ?? '' }} title={`(${x + boundary.minX}, ${y + boundary.minY})`}></div>
-                        })
-                    }
-                </div>
-            ))
-        }
+    return <div className='grid'>
+        <div className='grid-internal'>
+            {
+                grid.map((row, y) => (
+                    <div key={y} className='grid-row'>
+                        {
+                            row.map((pixel, x) => {
+                                return <div key={x} className='grid-cell' style={{ backgroundColor: pixel?.color ?? '' }} title={`(${x + boundary.minX}, ${y + boundary.minY})`}></div>
+                            })
+                        }
+                    </div>
+                ))
+            }
+        </div>
     </div>
 }

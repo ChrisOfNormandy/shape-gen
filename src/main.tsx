@@ -1,4 +1,4 @@
-import './main.scss';
+import './styles/main.scss';
 import { createRoot } from 'react-dom/client'
 import { ShapeProvider } from './ShapeProvider.tsx'
 import { StrictMode } from 'react'
