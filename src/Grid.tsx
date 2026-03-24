@@ -1,3 +1,4 @@
+import { uniqueKey } from "@syren-dev-tech/concauses/strings";
 import type { IShape } from "./shapes/Shape";
 import type { OutlineDefinition, Pixel } from "./shapes/types";
 import './styles/grid.scss';
@@ -88,10 +89,10 @@ export default function Grid({ shapes }: Readonly<GridProps>) {
         <div className='grid-internal'>
             {
                 grid.map((row, y) => (
-                    <div key={y} className='grid-row'>
+                    <div key={uniqueKey()} className='grid-row'>
                         {
                             row.map((pixel, x) => {
-                                return <div key={x} className='grid-cell' style={{ backgroundColor: pixel?.color ?? '' }} title={`(${x + boundary.minX}, ${y + boundary.minY})`}></div>
+                                return <div key={uniqueKey()} className='grid-cell' style={{ backgroundColor: pixel?.color ?? '' }} title={`(${x + boundary.minX}, ${y + boundary.minY})`}></div>
                             })
                         }
                     </div>

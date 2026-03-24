@@ -1,6 +1,6 @@
 import './styles/shape-form.scss';
 import { Button } from '@syren-dev-tech/confects/buttons';
-import { capitalize, uniqueKey } from '@syren-dev-tech/concauses/strings';
+import { capitalize } from '@syren-dev-tech/concauses/strings';
 import { ColorInput, DecimalInput, IntegerInput } from '@syren-dev-tech/confects/inputs';
 import { getClassName } from '@syren-dev-tech/concauses/props';
 import { Select } from "@syren-dev-tech/confects/selectors"
