@@ -31,16 +31,6 @@
 
       overflow: hidden;
       position: relative;
-
-      .mod-forms {
-        @include layout.flex(false, true);
-        @include layout.tall;
-
-        padding: 10px;
-        overflow: auto;
-        position: absolute;
-        right: 0;
-      }
     }
   }
 }

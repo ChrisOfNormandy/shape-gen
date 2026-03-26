@@ -1,0 +1,36 @@
+@use '~layout' as layout;
+
+.mod-forms-wrapper {
+  @include layout.flex(false, true);
+  @include layout.tall;
+
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+
+  .mod-forms {
+    @include layout.flex(false, true);
+
+    padding: 10px;
+    overflow: auto;
+    margin-bottom: 10px;
+    transition: max-width 0.3s ease-in-out;
+
+    &.open {
+      max-width: 100%;
+    }
+
+    &:not(.open) {
+      max-width: 0;
+      padding: 0;
+    }
+  }
+
+  .footer {
+    @include layout.flex-end(true);
+
+    .glyph {
+      width: fit-content;
+    }
+  }
+}

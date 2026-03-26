@@ -2,12 +2,15 @@
 @use '~styling' as styling;
 
 .grid {
-  @include layout.flex(true, true);
+  @include layout.flex;
   @include layout.fullsize;
 
-  overflow: auto;
+  overflow: hidden;
 
   .grid-internal {
+    @include layout.flex(false, true);
+
+    overflow: auto;
 
     .grid-row {
       display: flex;

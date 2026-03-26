@@ -5,7 +5,7 @@ import { ColorInput, DecimalInput, IntegerInput } from '@syren-dev-tech/confects
 import { getClassName } from '@syren-dev-tech/concauses/props';
 import { Select } from "@syren-dev-tech/confects/selectors"
 import { ThemeOptions } from '@syren-dev-tech/confetti/themes';
-import { useActionState, useState } from "react"
+import { useActionState, useState, useRef } from "react"
 import { useShapes } from '../ShapeProvider';
 import type { ShapeType } from "../shapes/types"
 import { shapeOptions } from './options';
@@ -16,6 +16,27 @@ export default function ShapeForm() {
     const { setShapes } = useShapes()
 
     const [selectedShape, setSelectedShape] = useState<ShapeType>('ellipse')
+    const [position, setPosition] = useState({ x: 0, y: 0 })
+    const [isDragging, setIsDragging] = useState(false)
+    const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+    const wrapperRef = useRef<HTMLDivElement>(null)
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        setIsDragging(true)
+        setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y })
+    }
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isDragging) return
+        setPosition({
+            x: e.clientX - dragStart.x,
+            y: e.clientY - dragStart.y
+        })
+    }
+
+    const handleMouseUp = () => {
+        setIsDragging(false)
+    }
 
     const [error, submitAction, isPending] = useActionState<Error | null, FormData>(
         (_previousState, formData) => {
@@ -35,7 +56,19 @@ export default function ShapeForm() {
 
     const color = randomColor();
 
-    return <div className={getClassName('shape-form-wrapper', new ThemeOptions({ background: { style: 'secondary' } }).toClassName())}>
+    return <div // NOSONAR - Allow draggable element
+        ref={wrapperRef}
+        className={getClassName('shape-form-wrapper', new ThemeOptions({ background: { style: 'secondary' } }).toClassName())}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        style={{
+            transform: `translate(${position.x}px, ${position.y}px)`,
+            cursor: isDragging ? 'grabbing' : 'grab',
+            transition: isDragging ? 'none' : 'transform 0.2s ease-out'
+        }}
+    >
         <Select
             value={selectedShape}
             onChange={e => setSelectedShape(e.target.value as ShapeType)}

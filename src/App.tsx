@@ -4,12 +4,11 @@ import { Heading } from '@syren-dev-tech/confects/decorations';
 import { IntegerInput } from '@syren-dev-tech/confects/inputs';
 import { Page, PageBody, PageHeader, PageMain } from '@syren-dev-tech/confects/containers';
 import { ThemeOptions } from '@syren-dev-tech/confetti/themes';
-import { uniqueKey } from '@syren-dev-tech/concauses/strings';
 import { useShapes } from './ShapeProvider';
 import { useState } from "react"
 import Grid from './Grid';
+import ModForms from './ModForms';
 import ShapeForm from './forms/ShapeForm';
-import ShapeModForm from './forms/ShapeModForm';
 
 export default function App() {
 
@@ -48,9 +47,7 @@ export default function App() {
 
                 <Grid shapes={shapesThisLayer} />
 
-                <div className='mod-forms'>
-                    {shapesThisLayer.map((shape) => <ShapeModForm key={uniqueKey()} shape={shape} />)}
-                </div>
+                <ModForms shownLayer={shownLayer} />
             </PageMain>
         </PageBody>
     </Page>
