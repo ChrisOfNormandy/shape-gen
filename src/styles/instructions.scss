@@ -1,0 +1,43 @@
+@use '~layout' as layout;
+@use '~styling' as styling;
+
+.instructions-wrapper {
+
+  .instructions {
+    @include layout.flex(false, true);
+    @include layout.floating(50%, 50%);
+    @include layout.centered;
+    @include styling.rounded;
+
+    padding: 20px;
+    max-height: 75%;
+    overflow: hidden;
+
+    .markdown-renderer {
+      @include layout.flex(false, true);
+
+      overflow: hidden;
+      padding: 10px;
+
+      .md-body {
+        overflow: auto;
+      }
+    }
+
+    .no-open {
+      @include layout.flex-end(true);
+
+      padding: 10px;
+
+      .glyph {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .toggle-instructions-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+}

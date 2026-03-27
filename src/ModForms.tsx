@@ -9,7 +9,7 @@ import { getClassName } from '@syren-dev-tech/concauses/props';
 export default function ModForms({ shownLayer }: Readonly<{ shownLayer: number }>) {
     const { shapes } = useShapes();
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const shapesThisLayer = shapes.filter(shape => shape.getOptions().layer === shownLayer);
 

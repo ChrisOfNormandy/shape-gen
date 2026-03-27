@@ -9,6 +9,7 @@ import { useState } from "react"
 import Grid from './Grid';
 import ModForms from './ModForms';
 import ShapeForm from './forms/ShapeForm';
+import Instructions from './Instructions';
 
 export default function App() {
 
@@ -23,6 +24,7 @@ export default function App() {
     return <Page theme={new ThemeOptions({ background: { style: 'body' } })}>
         <PageHeader theme={new ThemeOptions({ background: { style: 'primary' } })}>
             <Heading>Pixel Blueprint Generator</Heading>
+            <title>Pixel Blueprint Generator</title>
 
             <div className='header-controls'>
                 <div className='origin-controls'>
@@ -48,6 +50,8 @@ export default function App() {
                 <Grid shapes={shapesThisLayer} />
 
                 <ModForms shownLayer={shownLayer} />
+
+                <Instructions />
             </PageMain>
         </PageBody>
     </Page>
