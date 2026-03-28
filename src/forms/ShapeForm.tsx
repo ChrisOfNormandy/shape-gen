@@ -3,13 +3,13 @@ import { Button } from '@syren-dev-tech/confects/buttons';
 import { capitalize } from '@syren-dev-tech/concauses/strings';
 import { ColorInput, DecimalInput, IntegerInput } from '@syren-dev-tech/confects/inputs';
 import { getClassName } from '@syren-dev-tech/concauses/props';
+import { parseFormDataForShape, randomColor } from './helpers';
 import { Select } from "@syren-dev-tech/confects/selectors"
+import { shapeOptions } from './options';
 import { ThemeOptions } from '@syren-dev-tech/confetti/themes';
 import { useActionState, useState, useRef } from "react"
 import { useShapes } from '../ShapeProvider';
 import type { ShapeType } from "../shapes/types"
-import { shapeOptions } from './options';
-import { parseFormDataForShape, randomColor } from './helpers';
 
 export default function ShapeForm() {
 
@@ -21,7 +21,14 @@ export default function ShapeForm() {
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
     const wrapperRef = useRef<HTMLDivElement>(null)
 
+    const isInteractiveElement = (element: HTMLElement) => Boolean(
+        element.closest('button, input, select, textarea, label, option, [contenteditable="true"], [role="button"]')
+    )
+
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isInteractiveElement(e.target as HTMLElement))
+            return
+
         setIsDragging(true)
         setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y })
     }
