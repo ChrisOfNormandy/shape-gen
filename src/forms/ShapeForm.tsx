@@ -103,7 +103,11 @@ export default function ShapeForm() {
             </div>
 
             <div className='controls'>
-                <Button type='submit' disabled={isPending} theme={new ThemeOptions({ background: { style: 'success' } })}>
+                <Button
+                    type='submit'
+                    disabled={isPending}
+                    theme={new ThemeOptions({ background: { style: 'trinary' }, border: { style: 'trinary' } })}
+                >
                     Create Shape
                 </Button>
             </div>

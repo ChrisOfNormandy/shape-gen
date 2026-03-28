@@ -2,8 +2,9 @@
 @use '~styling' as styling;
 
 .shape-mod-form-wrapper {
-  @include layout.flex(true);
+  @include layout.flex-between(true);
   @include styling.rounded;
+  @include layout.tall;
 
   padding: 10px;
 

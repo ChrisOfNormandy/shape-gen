@@ -1,9 +1,9 @@
 import { Button } from "@syren-dev-tech/confects/buttons";
-import { useShapes } from "../ShapeProvider";
-import type { IShape } from "../shapes/Shape";
 import { getClassName } from "@syren-dev-tech/concauses/props";
 import { ThemeOptions } from "@syren-dev-tech/confetti/themes";
 import { useActionState } from "react";
+import { useShapes } from "../ShapeProvider";
+import type { IShape } from "../shapes/Shape";
 
 export default function ShapeCopyForm({ shape }: Readonly<{ shape: IShape }>) {
 
@@ -22,6 +22,6 @@ export default function ShapeCopyForm({ shape }: Readonly<{ shape: IShape }>) {
     return <form action={submitAction} className='shape-mod-controls-form'>
         {error && <div className={getClassName('error', new ThemeOptions({ background: { style: 'hazard' } }).toClassName())}>{error.message}</div>}
 
-        <Button type='submit' disabled={isPending} theme={new ThemeOptions({ background: { style: 'success' } })}>Copy</Button>
+        <Button type='submit' disabled={isPending} theme={new ThemeOptions({ background: { style: 'trinary' }, border: { style: 'trinary' } })}>Copy</Button>
     </form>
 }

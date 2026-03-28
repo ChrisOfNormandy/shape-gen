@@ -25,19 +25,23 @@
     }
 
     .no-open {
-      @include layout.flex-end(true);
+      @include layout.flex-between(true);
 
       padding: 10px;
 
-      .glyph {
-        margin-left: 10px;
+      .startup {
+        @include layout.flex-between(true);
+
+        .glyph {
+          margin-left: 10px;
+        }
       }
     }
   }
 
   .toggle-instructions-btn {
     position: absolute;
-    bottom: 10px;
+    bottom: 50px;
     left: 10px;
   }
 }

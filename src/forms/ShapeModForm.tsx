@@ -62,7 +62,11 @@ export default function ShapeModForm({ shape }: Readonly<ShapeModFormProps>) {
             </div>
 
             <div className='controls'>
-                <Button type='submit' disabled={isPending} theme={new ThemeOptions({ background: { style: 'success' } })}>
+                <Button
+                    type='submit'
+                    disabled={isPending}
+                    theme={new ThemeOptions({ background: { style: 'trinary' }, border: { style: 'trinary' } })}
+                >
                     Update
                 </Button>
             </div>

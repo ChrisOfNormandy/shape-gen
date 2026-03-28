@@ -37,7 +37,7 @@ export default function RectangleForm({ shape }: Readonly<RectangleFormProps>) {
 
     const rect = shape as Rectangle | undefined
 
-    return <div>
+    return <div className='shape-inputs'>
         <label htmlFor="width">Width:</label>
         <IntegerInput type="number" id="width" name="width" defaultValue={rect ? rect.width : 5} theme={new ThemeOptions({ background: { style: 'main' } })} />
 

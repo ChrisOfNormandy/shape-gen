@@ -20,6 +20,6 @@ export default function ShapeDeletionForm({ shape }: Readonly<{ shape: IShape }>
     return <form action={submitAction} className='shape-mod-controls-form'>
         {error && <div className={getClassName('error', new ThemeOptions({ background: { style: 'hazard' } }).toClassName())}>{error.message}</div>}
 
-        <Button disabled={isPending} type='submit' theme={new ThemeOptions({ background: { style: 'hazard' } })}>Delete</Button>
+        <Button disabled={isPending} type='submit' theme={new ThemeOptions({ background: { style: 'trinary' }, border: { style: 'trinary' } })}>Delete</Button>
     </form>
 }

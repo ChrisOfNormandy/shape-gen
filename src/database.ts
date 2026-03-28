@@ -5,20 +5,28 @@ import Rectangle from "./shapes/Rectangle";
 import type { IShape } from "./shapes/Shape";
 import { openDB } from "idb";
 
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 interface ShapeSchema extends IShape {
     db_id: number; // Unique identifier for the shape in the database
 }
 
-export async function saveShapesToDatabase(shapes: IShape[]): Promise<void> {
+export async function initializeDatabase(): Promise<void> {
     const db = await openDB("ShapeDatabase", DB_VERSION, {
         upgrade(db) {
             if (!db.objectStoreNames.contains("shapes")) {
                 db.createObjectStore("shapes", { keyPath: "db_id", autoIncrement: true });
             }
+            if (!db.objectStoreNames.contains("origin")) {
+                db.createObjectStore("origin", { keyPath: "id" });
+            }
         },
     });
+    db.close();
+}
+
+export async function saveShapesToDatabase(shapes: IShape[]): Promise<void> {
+    const db = await openDB("ShapeDatabase", DB_VERSION);
 
     const tx = db.transaction("shapes", "readwrite");
     const store = tx.objectStore("shapes");
@@ -34,13 +42,7 @@ export async function saveShapesToDatabase(shapes: IShape[]): Promise<void> {
 }
 
 export async function loadShapesFromDatabase(): Promise<IShape[]> {
-    const db = await openDB("ShapeDatabase", DB_VERSION, {
-        upgrade(db) {
-            if (!db.objectStoreNames.contains("shapes")) {
-                db.createObjectStore("shapes", { keyPath: "db_id", autoIncrement: true });
-            }
-        },
-    });
+    const db = await openDB("ShapeDatabase", DB_VERSION);
 
     const tx = db.transaction("shapes", "readonly");
     const store = tx.objectStore("shapes");
@@ -68,3 +70,37 @@ export async function loadShapesFromDatabase(): Promise<IShape[]> {
         }
     });
 }
+
+export async function saveOriginToDatabase(origin: { x: number, y: number }): Promise<void> {
+    const db = await openDB("ShapeDatabase", DB_VERSION, {
+        upgrade(db) {
+            if (!db.objectStoreNames.contains("origin")) {
+                db.createObjectStore("origin", { keyPath: "id" });
+            }
+        },
+    });
+
+    const tx = db.transaction("origin", "readwrite");
+    const store = tx.objectStore("origin");
+
+    // Save the origin with a fixed id of 1
+    await store.put({ id: 1, ...origin });
+
+    await tx.done;
+}
+
+export async function loadOriginFromDatabase(): Promise<{ x: number, y: number }> {
+    const db = await openDB("ShapeDatabase", DB_VERSION, {
+        upgrade(db) {
+            if (!db.objectStoreNames.contains("origin")) {
+                db.createObjectStore("origin", { keyPath: "id" });
+            }
+        },
+    });
+
+    const tx = db.transaction("origin", "readonly");
+    const store = tx.objectStore("origin");
+    const originData = await store.get(1);
+
+    return originData ? { x: originData.x, y: originData.y } : { x: 0, y: 0 };
+}   

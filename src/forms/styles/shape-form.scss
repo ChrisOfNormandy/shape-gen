@@ -9,6 +9,7 @@
   padding: 10px;
   left: 0;
   width: fit-content;
+  z-index: 1;
 
   .shape-form {
     @include styling.rounded;

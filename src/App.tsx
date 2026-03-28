@@ -13,10 +13,8 @@ import Instructions from './Instructions';
 
 export default function App() {
 
-    const { shapes } = useShapes();
+    const { shapes, origin, setOrigin } = useShapes();
 
-    const [originX, setOriginX] = useState(0)
-    const [originY, setOriginY] = useState(0)
     const [shownLayer, setShownLayer] = useState(0)
 
     const shapesThisLayer = shapes.filter(shape => shape.getOptions().layer === shownLayer);
@@ -29,10 +27,10 @@ export default function App() {
             <div className='header-controls'>
                 <div className='origin-controls'>
                     <label htmlFor='originX'>Origin X:</label>
-                    <IntegerInput value={originX} onChange={(e) => setOriginX(Number(e.target.value))} name='originX' theme={new ThemeOptions({ background: { style: 'main' } })} />
+                    <IntegerInput value={origin.x} onChange={(e) => setOrigin(prev => ({ ...prev, x: Number(e.target.value) }))} name='originX' theme={new ThemeOptions({ background: { style: 'main' } })} />
 
                     <label htmlFor='originY'>Origin Y:</label>
-                    <IntegerInput value={originY} onChange={(e) => setOriginY(Number(e.target.value))} name='originY' theme={new ThemeOptions({ background: { style: 'main' } })} />
+                    <IntegerInput value={origin.y} onChange={(e) => setOrigin(prev => ({ ...prev, y: Number(e.target.value) }))} name='originY' theme={new ThemeOptions({ background: { style: 'main' } })} />
                 </div>
 
                 <div className='layer-controls'>

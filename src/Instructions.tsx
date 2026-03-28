@@ -17,21 +17,30 @@ export default function Instructions() {
                 <MarkdownRenderer href='/shape-gen/instructions.md' />
 
                 <div className='no-open'>
-                    <div>Do not open instructions on startup</div>
-
                     <Glyph
-                        icon={storedShow === 'false' ? 'square-fill' : 'square'}
-                        onClick={() => {
-                            if (storedShow === 'false') {
-                                localStorage.removeItem('show_instructions');
-                                setStoredShow('')
-                            } else {
-                                localStorage.setItem('show_instructions', 'false');
-                                setStoredShow('false');
-                            }
-                        }}
+                        className='close-btn'
+                        icon='x-lg'
+                        onClick={() => setShow(prev => !prev)}
                         theme={new ThemeOptions({ background: { style: 'primary' } })}
                     />
+
+                    <div className='startup'>
+                        <div>Do not open instructions on startup</div>
+
+                        <Glyph
+                            icon={storedShow === 'false' ? 'square-fill' : 'square'}
+                            onClick={() => {
+                                if (storedShow === 'false') {
+                                    localStorage.removeItem('show_instructions');
+                                    setStoredShow('')
+                                } else {
+                                    localStorage.setItem('show_instructions', 'false');
+                                    setStoredShow('false');
+                                }
+                            }}
+                            theme={new ThemeOptions({ background: { style: 'primary' } })}
+                        />
+                    </div>
                 </div>
             </div>
         }

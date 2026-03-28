@@ -1,7 +1,7 @@
 @use '~layout' as layout;
 
 .mod-forms-wrapper {
-  @include layout.flex(false, true);
+  @include layout.flex-between(false, true);
   @include layout.tall;
 
   overflow: hidden;
@@ -14,7 +14,7 @@
     padding: 10px;
     overflow: auto;
     margin-bottom: 10px;
-    transition: max-width 0.3s ease-in-out;
+    transition: max-width 0.3s ease;
 
     &.open {
       max-width: 100%;
@@ -28,6 +28,8 @@
 
   .footer {
     @include layout.flex-end(true);
+
+    padding: 20px;
 
     .glyph {
       width: fit-content;

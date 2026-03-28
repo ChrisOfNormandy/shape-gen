@@ -8,26 +8,37 @@
   overflow: hidden;
 
   .grid-internal {
-    @include layout.flex(false, true);
+    @include layout.flex;
+    @include layout.fullsize;
 
-    overflow: auto;
+    overflow: hidden;
+    position: relative;
+    background: #f3f3f3;
 
-    .grid-row {
-      display: flex;
+    .grid-canvas {
+      @include layout.fullsize;
 
-      .grid-cell {
-        min-width: 16px;
-        min-height: 16px;
-        border: 1px solid black;
+      display: block;
+      cursor: grab;
+      touch-action: none;
+    }
 
-        &.active {
-          background-color: black;
-        }
+    .grid-canvas:active {
+      cursor: grabbing;
+    }
 
-        &.not-active {
-          background-color: white;
-        }
-      }
+    .grid-hover-coordinate {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background-color: rgb(255 255 255 / 85%);
+      border: 1px solid #999;
+      font-size: 0.9rem;
+      pointer-events: none;
+      color: #222;
+      user-select: none;
     }
   }
 }
