@@ -3,6 +3,7 @@ import { ThemeOptions } from "@syren-dev-tech/confetti/themes"
 import type { IShape } from "../../shapes/Shape"
 import Line from "../../shapes/Line"
 import { checkValueIsNumber, checkValueIsString } from "../helpers"
+import ShapeOptions from "../../shapes/ShapeOptions"
 
 export function handleLineFormSubmit(formData: FormData): IShape | Error {
     const endpointX = formData.get('endpointX')
@@ -26,7 +27,13 @@ export function handleLineFormSubmit(formData: FormData): IShape | Error {
     const valueError = checkValueIsNumber(parsedEndpointX, parsedEndpointY, parsedBuffer, parsedLayer, parsedOriginX, parsedOriginY)
     if (valueError) return valueError
 
-    return new Line(parsedEndpointX, parsedEndpointY, { layer: parsedLayer, color: color as string, originX: parsedOriginX, originY: parsedOriginY, buffer: parsedBuffer })
+    const options = new ShapeOptions()
+        .setBuffer(parsedBuffer)
+        .setLayer(parsedLayer)
+        .setColor(color as string)
+        .setOrigin(parsedOriginX, parsedOriginY)
+
+    return new Line(parsedEndpointX, parsedEndpointY, options)
 }
 
 export default function LineForm({ shape }: Readonly<{ shape?: IShape }>) {

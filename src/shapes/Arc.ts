@@ -1,5 +1,6 @@
 import { Shape, type IShape } from "./Shape";
-import type { OutlineDefinition, ShapeOptions } from "./types";
+import type ShapeOptions from "./ShapeOptions";
+import type { OutlineDefinition } from "./types";
 
 interface Point {
     x: number
@@ -43,7 +44,23 @@ export default class Arc extends Shape implements IShape {
     }
 
     copy(): IShape {
-        return new Arc(this.endpointX, this.endpointY, this.controlPointX, this.controlPointY, { ...this.options })
+        return new Arc(this.endpointX, this.endpointY, this.controlPointX, this.controlPointY, this.options)
+    }
+
+    flipHorizontal(): IShape {
+        const newOriginX = -this.options.originX;
+        const newControlPointX = -this.controlPointX;
+        const newEndpointX = -this.endpointX;
+
+        return new Arc(newEndpointX, this.endpointY, newControlPointX, this.controlPointY, this.options.setOrigin(newOriginX, this.options.originY))
+    }
+
+    flipVertical(): IShape {
+        const newOriginY = -this.options.originY;
+        const newControlPointY = -this.controlPointY;
+        const newEndpointY = -this.endpointY;
+
+        return new Arc(this.endpointX, newEndpointY, this.controlPointX, newControlPointY, this.options.setOrigin(this.options.originX, newOriginY))
     }
 
     constructor(endpointX: number, endpointY: number, controlPointX: number, controlPointY: number, options: ShapeOptions) {

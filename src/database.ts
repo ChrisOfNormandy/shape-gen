@@ -4,6 +4,7 @@ import Line from "./shapes/Line";
 import Rectangle from "./shapes/Rectangle";
 import type { IShape } from "./shapes/Shape";
 import { openDB } from "idb";
+import ShapeOptions from "./shapes/ShapeOptions";
 
 const DB_VERSION = 2;
 
@@ -53,19 +54,19 @@ export async function loadShapesFromDatabase(): Promise<IShape[]> {
         switch (shape.type) {
             case 'ellipse': {
                 const data = shape as unknown as Ellipse;
-                return new Ellipse(data.radiusX, data.radiusY, data.options);
+                return new Ellipse(data.radiusX, data.radiusY, new ShapeOptions().from(data.options));
             }
             case 'rectangle': {
                 const data = shape as unknown as Rectangle;
-                return new Rectangle(data.width, data.height, data.options);
+                return new Rectangle(data.width, data.height, new ShapeOptions().from(data.options));
             }
             case 'line': {
                 const data = shape as unknown as Line;
-                return new Line(data.endpointX, data.endpointY, data.options);
+                return new Line(data.endpointX, data.endpointY, new ShapeOptions().from(data.options));
             }
             case 'arc': {
                 const data = shape as unknown as Arc;
-                return new Arc(data.endpointX, data.endpointY, data.controlPointX, data.controlPointY, data.options);
+                return new Arc(data.endpointX, data.endpointY, data.controlPointX, data.controlPointY, new ShapeOptions().from(data.options));
             }
         }
     });

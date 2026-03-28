@@ -1,5 +1,6 @@
 import { Shape, type IShape } from "./Shape";
-import type { OutlineDefinition, ShapeOptions } from "./types";
+import type ShapeOptions from "./ShapeOptions";
+import type { OutlineDefinition } from "./types";
 
 export default class Ellipse extends Shape implements IShape {
 
@@ -52,7 +53,17 @@ export default class Ellipse extends Shape implements IShape {
     }
 
     copy(): IShape {
-        return new Ellipse(this.radiusX, this.radiusY, { ...this.options })
+        return new Ellipse(this.radiusX, this.radiusY, this.options)
+    }
+
+    flipHorizontal(): IShape {
+        const newOriginX = -this.options.originX;
+        return new Ellipse(this.radiusX, this.radiusY, this.options.setOrigin(newOriginX, this.options.originY))
+    }
+
+    flipVertical(): IShape {
+        const newOriginY = -this.options.originY;
+        return new Ellipse(this.radiusX, this.radiusY, this.options.setOrigin(this.options.originX, newOriginY))
     }
 
     constructor(radiusX: number, radiusY: number, options: ShapeOptions) {

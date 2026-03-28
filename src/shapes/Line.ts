@@ -1,5 +1,5 @@
 import { Shape, type IShape } from "./Shape";
-import type { ShapeOptions } from "./types";
+import type ShapeOptions from "./ShapeOptions";
 
 export default class Line extends Shape implements IShape {
     readonly endpointX: number
@@ -36,7 +36,21 @@ export default class Line extends Shape implements IShape {
     }
 
     copy(): IShape {
-        return new Line(this.endpointX, this.endpointY, { ...this.options })
+        return new Line(this.endpointX, this.endpointY, this.options)
+    }
+
+    flipHorizontal(): IShape {
+        const newOriginX = -this.options.originX;
+        const newEndpointX = -this.endpointX;
+
+        return new Line(newEndpointX, this.endpointY, this.options.setOrigin(newOriginX, this.options.originY))
+    }
+
+    flipVertical(): IShape {
+        const newOriginY = -this.options.originY;
+        const newEndpointY = -this.endpointY;
+
+        return new Line(this.endpointX, newEndpointY, this.options.setOrigin(this.options.originX, newOriginY))
     }
 
     constructor(endpointX: number, endpointY: number, options: ShapeOptions) {

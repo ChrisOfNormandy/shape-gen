@@ -3,6 +3,7 @@ import { ThemeOptions } from "@syren-dev-tech/confetti/themes"
 import Ellipse from "../../shapes/Ellipse"
 import type { IShape } from "../../shapes/Shape"
 import { checkValueIsNumber, checkValueIsString } from "../helpers"
+import ShapeOptions from "../../shapes/ShapeOptions"
 
 export function handleEllipseFormSubmit(formData: FormData): IShape | Error {
     const radiusX = formData.get('radiusX')
@@ -26,7 +27,13 @@ export function handleEllipseFormSubmit(formData: FormData): IShape | Error {
     const valueError = checkValueIsNumber(parsedRadiusX, parsedRadiusY, parsedBuffer, parsedLayer, parsedOriginX, parsedOriginY)
     if (valueError) return valueError
 
-    return new Ellipse(parsedRadiusX, parsedRadiusY, { layer: parsedLayer, color: color as string, originX: parsedOriginX, originY: parsedOriginY, buffer: parsedBuffer })
+    const options = new ShapeOptions()
+        .setBuffer(parsedBuffer)
+        .setLayer(parsedLayer)
+        .setColor(color as string)
+        .setOrigin(parsedOriginX, parsedOriginY)
+
+    return new Ellipse(parsedRadiusX, parsedRadiusY, options)
 }
 
 interface EllipseFormProps {

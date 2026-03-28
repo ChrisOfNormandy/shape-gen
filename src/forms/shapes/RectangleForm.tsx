@@ -1,8 +1,9 @@
 import { checkValueIsNumber, checkValueIsString } from "../helpers";
 import { IntegerInput } from "@syren-dev-tech/confects/inputs";
+import { ThemeOptions } from "@syren-dev-tech/confetti/themes";
 import Rectangle from "../../shapes/Rectangle";
 import type { IShape } from "../../shapes/Shape";
-import { ThemeOptions } from "@syren-dev-tech/confetti/themes";
+import ShapeOptions from "../../shapes/ShapeOptions";
 
 export function handleRectangleFormSubmit(formData: FormData): IShape | Error {
     const width = formData.get('width')
@@ -26,7 +27,13 @@ export function handleRectangleFormSubmit(formData: FormData): IShape | Error {
     const valueError = checkValueIsNumber(parsedWidth, parsedHeight, parsedBuffer, parsedLayer, parsedOriginX, parsedOriginY)
     if (valueError) return valueError
 
-    return new Rectangle(parsedWidth, parsedHeight, { layer: parsedLayer, color: color as string, originX: parsedOriginX, originY: parsedOriginY, buffer: parsedBuffer })
+    const options = new ShapeOptions()
+        .setBuffer(parsedBuffer)
+        .setLayer(parsedLayer)
+        .setColor(color as string)
+        .setOrigin(parsedOriginX, parsedOriginY)
+
+    return new Rectangle(parsedWidth, parsedHeight, options)
 }
 
 interface RectangleFormProps {

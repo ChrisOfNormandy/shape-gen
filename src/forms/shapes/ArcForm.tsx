@@ -3,6 +3,7 @@ import { IntegerInput } from "@syren-dev-tech/confects/inputs"
 import { ThemeOptions } from "@syren-dev-tech/confetti/themes"
 import Arc from "../../shapes/Arc"
 import type { IShape } from "../../shapes/Shape"
+import ShapeOptions from "../../shapes/ShapeOptions"
 
 export function handleArcFormSubmit(formData: FormData): Arc | Error {
     const endpointX = formData.get('endpointX')
@@ -30,7 +31,13 @@ export function handleArcFormSubmit(formData: FormData): Arc | Error {
     const valueError = checkValueIsNumber(parsedEndpointX, parsedEndpointY, parsedControlPointX, parsedControlPointY, parsedBuffer, parsedLayer, parsedOriginX, parsedOriginY)
     if (valueError) return valueError
 
-    return new Arc(parsedEndpointX, parsedEndpointY, parsedControlPointX, parsedControlPointY, { layer: parsedLayer, color: color as string, originX: parsedOriginX, originY: parsedOriginY, buffer: parsedBuffer })
+    const options = new ShapeOptions()
+        .setBuffer(parsedBuffer)
+        .setLayer(parsedLayer)
+        .setColor(color as string)
+        .setOrigin(parsedOriginX, parsedOriginY)
+
+    return new Arc(parsedEndpointX, parsedEndpointY, parsedControlPointX, parsedControlPointY, options)
 }
 
 export default function ArcForm({ shape }: Readonly<{ shape?: IShape }>) {

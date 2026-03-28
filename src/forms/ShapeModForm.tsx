@@ -10,6 +10,8 @@ import { useShapes } from '../ShapeProvider';
 import type { IShape } from '../shapes/Shape';
 import ShapeDeletionForm from './ShapeDeletionForm';
 import ShapeCopyForm from './ShapeCopyForm';
+import ShapeFlipHorizontalForm from './ShapeFlipHorizontalForm';
+import ShapeFlipVerticalForm from './ShapeFlipVerticalForm';
 
 interface ShapeModFormProps {
     shape: IShape
@@ -76,6 +78,10 @@ export default function ShapeModForm({ shape }: Readonly<ShapeModFormProps>) {
             <ShapeDeletionForm shape={shape} />
 
             <ShapeCopyForm shape={shape} />
+
+            <ShapeFlipHorizontalForm shape={shape} />
+
+            <ShapeFlipVerticalForm shape={shape} />
         </div>
     </div>
 }
