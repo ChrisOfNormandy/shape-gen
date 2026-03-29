@@ -21,8 +21,8 @@ export default function App() {
 
     return <Page theme={new ThemeOptions({ background: { style: 'body' } })}>
         <PageHeader theme={new ThemeOptions({ background: { style: 'primary' } })}>
-            <Heading>Pixel Blueprint Generator</Heading>
-            <title>Pixel Blueprint Generator</title>
+            <Heading>Minecraft Circle Generator and Pixel Blueprint Tool</Heading>
+            <p>Build Minecraft circles, ellipses, arcs, and pixel shape blueprints with live layer controls.</p>
 
             <div className='header-controls'>
                 <div className='origin-controls'>

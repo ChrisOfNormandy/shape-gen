@@ -1,5 +1,7 @@
 # How to Use
 
+Shape Gen is a Minecraft circle generator and pixel blueprint tool for creating circles, ellipses, lines, rectangles, and arcs.
+
 On the left is a form for creating new shapes.
 Select a shape using the option select, then set its definition.
 

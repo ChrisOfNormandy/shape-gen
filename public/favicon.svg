@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Shape Gen favicon</title>
+  <desc id="desc">A circle icon with a smooth left half and a pixelated right half.</desc>
+
+  <!-- Smooth left half -->
+  <path d="M32 10 A22 22 0 0 0 32 54 Z" fill="#2f9e44" />
+
+  <!-- Pixelated right half -->
+  <g fill="#74c69d" transform="translate(32 32) scale(0.86) translate(-32 -32) translate(-1 -2)">
+    <rect x="32" y="8" width="4" height="4" />
+    <rect x="36" y="8" width="4" height="4" />
+
+    <rect x="40" y="12" width="4" height="4" />
+    <rect x="44" y="12" width="4" height="4" />
+
+    <rect x="48" y="16" width="4" height="4" />
+
+    <rect x="52" y="20" width="4" height="4" />
+
+    <rect x="52" y="24" width="4" height="4" />
+
+    <rect x="56" y="28" width="4" height="4" />
+
+    <rect x="56" y="32" width="4" height="4" />
+
+    <rect x="56" y="36" width="4" height="4" />
+
+    <rect x="52" y="40" width="4" height="4" />
+
+    <rect x="52" y="44" width="4" height="4" />
+
+    <rect x="48" y="48" width="4" height="4" />
+
+    <rect x="40" y="52" width="4" height="4" />
+    <rect x="44" y="52" width="4" height="4" />
+
+    <rect x="32" y="56" width="4" height="4" />
+    <rect x="36" y="56" width="4" height="4" />
+
+  </g>
+
+  <!-- Center split accent and outer ring for clarity at small sizes -->
+  <rect x="31" y="10" width="2" height="44" fill="#1b4332" />
+  <path d="M32 10 A22 22 0 0 0 32 54" fill="none" stroke="#1b4332" stroke-width="2" />
+</svg>
