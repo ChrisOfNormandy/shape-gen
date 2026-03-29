@@ -4,6 +4,7 @@
     "private": true,
     "type": "module",
     "author": "ChrisOfNormandy",
+    "license": "MIT",
     "version": "0.0.0",
     "dependencies": {
         "@syren-dev-tech/concauses": "^0.1.3",

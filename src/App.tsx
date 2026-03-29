@@ -1,8 +1,8 @@
 import './styles/app.scss';
-import { Glyph } from '@syren-dev-tech/confects/buttons';
+import { BrandButton, Glyph } from '@syren-dev-tech/confects/buttons';
 import { Heading } from '@syren-dev-tech/confects/decorations';
 import { IntegerInput } from '@syren-dev-tech/confects/inputs';
-import { Page, PageBody, PageHeader, PageMain } from '@syren-dev-tech/confects/containers';
+import { Page, PageBody, PageFooter, PageHeader, PageMain } from '@syren-dev-tech/confects/containers';
 import { ThemeOptions } from '@syren-dev-tech/confetti/themes';
 import { useShapes } from './ShapeProvider';
 import { useState } from "react"
@@ -52,5 +52,19 @@ export default function App() {
                 <Instructions />
             </PageMain>
         </PageBody>
+
+        <PageFooter>
+            <span>Created by ChrisOfNormandy</span>
+
+            <div className='brand-btns'>
+                <a href='https://github.com/chrisofnormandy/shape-gen' target='_blank' rel='noopener noreferrer'>
+                    <BrandButton brand='github' fill />
+                </a>
+
+                <a href='https://modding.syrenproject.com' target='_blank' rel='noopener noreferrer'>
+                    <BrandButton brand='discord' fill />
+                </a>
+            </div>
+        </PageFooter>
     </Page>
 }

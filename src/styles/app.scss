@@ -1,4 +1,5 @@
 @use '~layout' as layout;
+@use '~interactive' as int;
 
 .page {
 
@@ -31,6 +32,24 @@
 
       overflow: hidden;
       position: relative;
+    }
+  }
+
+  .page-footer {
+    @include layout.flex-between(true);
+
+    .brand-btns {
+      @include layout.flex-even(true);
+
+      a:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      .brand-btn {
+        padding: 3px;
+
+        @include int.clickable;
+      }
     }
   }
 }
