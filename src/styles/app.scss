@@ -5,11 +5,41 @@
 
   .page-header {
 
+    .header-intro {
+
+      .logo-heading {
+        @include layout.flex(true);
+
+        .heading {
+          margin-left: 10px;
+        }
+      }
+
+      .desc {
+        font-size: 12px;
+        max-width: 400px;
+      }
+    }
+
     .header-controls {
       @include layout.flex-end(false, true);
 
       .origin-controls {
-        @include layout.flex(true);
+        @include layout.flex(true, true);
+
+        .control-group {
+          @include layout.flex(true);
+
+          &:not(:first-child) {
+            margin-top: 3px;
+          }
+
+          .input {
+            margin-left: 5px;
+            max-width: 64px;
+            text-align: center;
+          }
+        }
       }
 
       .layer-controls {

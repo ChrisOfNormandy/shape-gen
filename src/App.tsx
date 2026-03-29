@@ -21,16 +21,24 @@ export default function App() {
 
     return <Page theme={new ThemeOptions({ background: { style: 'body' } })}>
         <PageHeader theme={new ThemeOptions({ background: { style: 'primary' } })}>
-            <Heading>Minecraft Circle Generator and Pixel Blueprint Tool</Heading>
-            <p>Build Minecraft circles, ellipses, arcs, and pixel shape blueprints with live layer controls.</p>
+            <div className='header-intro'>
+                <div className='logo-heading'>
+                    <img src='/shape-gen/favicon.svg' alt='ShapeGen Logo' className='logo' width={64} height={64} />
+                    <Heading>ShapeGen</Heading>
+                </div>
+                <p className='desc'>Build Minecraft circles, ellipses, arcs, and pixel shape blueprints with live layer controls.</p>
+            </div>
 
             <div className='header-controls'>
                 <div className='origin-controls'>
-                    <label htmlFor='originX'>Origin X:</label>
-                    <IntegerInput value={origin.x} onChange={(e) => setOrigin(prev => ({ ...prev, x: Number(e.target.value) }))} name='originX' theme={new ThemeOptions({ background: { style: 'main' } })} />
-
-                    <label htmlFor='originY'>Origin Y:</label>
-                    <IntegerInput value={origin.y} onChange={(e) => setOrigin(prev => ({ ...prev, y: Number(e.target.value) }))} name='originY' theme={new ThemeOptions({ background: { style: 'main' } })} />
+                    <div className='control-group'>
+                        <label htmlFor='originX'>Origin X:</label>
+                        <IntegerInput value={origin.x} onChange={(e) => setOrigin(prev => ({ ...prev, x: Number(e.target.value) }))} name='originX' theme={new ThemeOptions({ background: { style: 'main' } })} />
+                    </div>
+                    <div className='control-group'>
+                        <label htmlFor='originY'>Origin Y:</label>
+                        <IntegerInput value={origin.y} onChange={(e) => setOrigin(prev => ({ ...prev, y: Number(e.target.value) }))} name='originY' theme={new ThemeOptions({ background: { style: 'main' } })} />
+                    </div>
                 </div>
 
                 <div className='layer-controls'>

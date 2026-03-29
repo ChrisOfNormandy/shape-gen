@@ -12,21 +12,27 @@
   z-index: 1;
 
   .shape-form {
+    @include layout.flex(true, true);
     @include styling.rounded;
 
     padding: 10px;
     margin-left: 10px;
 
+    .input {
+      max-width: 64px;
+      text-align: center;
+    }
+
     .shape-inputs {
-      @include layout.flex(false, true);
+      @include layout.flex(true, true);
     }
 
     .common-inputs {
-      @include layout.flex(false, true);
+      @include layout.flex(true, true);
     }
 
     .origin-inputs {
-      @include layout.flex(false, true);
+      @include layout.flex(true, true);
     }
 
     .controls {
