@@ -1,3 +1,4 @@
+import { pixel } from "./pixel";
 import { Shape, type IShape } from "./Shape";
 import type ShapeOptions from "./ShapeOptions";
 
@@ -19,7 +20,7 @@ export default class Line extends Shape implements IShape {
         let err = dx - dy;
 
         while (true) {
-            pixels.push({ x: x1, y: y1, color: this.options.color });
+            pixels.push(pixel(x1, y1, this.options.color, this.options.alpha));
             if (x1 === x2 && y1 === y2) break;
             const err2 = err * 2;
             if (err2 > -dy) {

@@ -10,6 +10,29 @@ interface GridProps {
 
 const CELL_SIZE = 24;
 
+function pixelInterpolate(oldPixel: Pixel, newPixel: Pixel): Pixel {
+    const alpha = newPixel.alpha + oldPixel.alpha * (1 - newPixel.alpha);
+    if (alpha === 0) {
+        return { x: newPixel.x, y: newPixel.y, color: newPixel.color, alpha: 0 };
+    }
+
+    const r1 = parseInt(oldPixel.color.slice(1, 3), 16);
+    const g1 = parseInt(oldPixel.color.slice(3, 5), 16);
+    const b1 = parseInt(oldPixel.color.slice(5, 7), 16);
+
+    const r2 = parseInt(newPixel.color.slice(1, 3), 16);
+    const g2 = parseInt(newPixel.color.slice(3, 5), 16);
+    const b2 = parseInt(newPixel.color.slice(5, 7), 16);
+
+    const r = Math.round((r2 * newPixel.alpha + r1 * oldPixel.alpha * (1 - newPixel.alpha)) / alpha);
+    const g = Math.round((g2 * newPixel.alpha + g1 * oldPixel.alpha * (1 - newPixel.alpha)) / alpha);
+    const b = Math.round((b2 * newPixel.alpha + b1 * oldPixel.alpha * (1 - newPixel.alpha)) / alpha);
+
+    const color = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+
+    return { x: newPixel.x, y: newPixel.y, color, alpha };
+}
+
 function merge2dArray(arrays: OutlineDefinition[]): OutlineDefinition {
     if (arrays.length === 0) return []
 
@@ -19,7 +42,7 @@ function merge2dArray(arrays: OutlineDefinition[]): OutlineDefinition {
         for (const pixel of array) {
             const key = `${pixel.x},${pixel.y}`;
             // Keep the last pixel drawn at this coordinate.
-            merged.set(key, { ...pixel });
+            merged.set(key, pixelInterpolate(merged.get(key) ?? { x: pixel.x, y: pixel.y, color: '#000000', alpha: 0 }, pixel));
         }
     }
 

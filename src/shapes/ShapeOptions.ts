@@ -3,6 +3,7 @@ import { randomColor } from "../forms/helpers"
 export default class ShapeOptions {
     buffer: number
     color: string
+    alpha: number
     layer: number
     originX: number
     originY: number
@@ -17,6 +18,11 @@ export default class ShapeOptions {
 
     setColor(color: string): this {
         this.color = color
+        return this
+    }
+
+    setAlpha(alpha: number): this {
+        this.alpha = alpha
         return this
     }
 
@@ -45,6 +51,7 @@ export default class ShapeOptions {
     from(options: ShapeOptions): this {
         this.buffer = options.buffer
         this.color = options.color
+        this.alpha = options.alpha
         this.layer = options.layer
         this.originX = options.originX
         this.originY = options.originY
@@ -57,6 +64,7 @@ export default class ShapeOptions {
     constructor() {
         this.buffer = 0
         this.color = randomColor();
+        this.alpha = 1
         this.layer = 0
         this.originX = 0
         this.originY = 0

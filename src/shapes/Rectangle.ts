@@ -1,3 +1,4 @@
+import { pixel } from "./pixel";
 import { Shape, type IShape } from "./Shape";
 import type ShapeOptions from "./ShapeOptions";
 
@@ -11,7 +12,7 @@ export default class Rectangle extends Shape implements IShape {
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
                 if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1)
-                    outlineDefinition.push({ x: x + this.options.originX, y: y + this.options.originY, color: this.options.color })
+                    outlineDefinition.push(pixel(x + this.options.originX, y + this.options.originY, this.options.color, this.options.alpha))
             }
         }
 

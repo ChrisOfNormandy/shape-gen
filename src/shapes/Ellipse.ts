@@ -1,3 +1,4 @@
+import { pixel } from "./pixel";
 import { Shape, type IShape } from "./Shape";
 import type ShapeOptions from "./ShapeOptions";
 import type { OutlineDefinition } from "./types";
@@ -45,7 +46,7 @@ export default class Ellipse extends Shape implements IShape {
         for (let y = -this.radiusY; y <= this.radiusY; y++) {
             for (let x = -this.radiusX; x <= this.radiusX; x++) {
                 if (this.isEllipseOutline(x, y))
-                    outlineDefinition.push({ x: x + this.options.originX, y: y + this.options.originY, color: this.options.color })
+                    outlineDefinition.push(pixel(x + this.options.originX, y + this.options.originY, this.options.color, this.options.alpha));
             }
         }
 

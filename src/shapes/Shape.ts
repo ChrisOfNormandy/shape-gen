@@ -2,14 +2,14 @@ import type ShapeOptions from "./ShapeOptions";
 import type { OutlineDefinition, ShapeType } from "./types";
 
 export interface IShape {
-    type: ShapeType
     options: ShapeOptions;
-    getOptions(): ShapeOptions
-    getType(): ShapeType
-    getPixelShape(): OutlineDefinition
+    type: ShapeType
     copy(): IShape
     flipHorizontal(): IShape
     flipVertical(): IShape
+    getOptions(): ShapeOptions
+    getPixelShape(): OutlineDefinition
+    getType(): ShapeType
 }
 
 export class Shape {

@@ -1,3 +1,4 @@
+import { pixel } from "./pixel";
 import { Shape, type IShape } from "./Shape";
 import type ShapeOptions from "./ShapeOptions";
 import type { OutlineDefinition } from "./types";
@@ -40,7 +41,7 @@ export default class Arc extends Shape implements IShape {
             points.push(this.quadraticBezier(t, p0, p1, p2))
         }
 
-        return points.map(p => ({ x: Math.round(p.x), y: Math.round(p.y), color: this.options.color }))
+        return points.map(p => pixel(Math.round(p.x), Math.round(p.y), this.options.color, this.options.alpha));
     }
 
     copy(): IShape {
